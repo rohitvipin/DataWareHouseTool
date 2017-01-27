@@ -1,0 +1,55 @@
+﻿<Window x:Class="DataWareHouseTool.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataWareHouseTool.Views"
+        mc:Ignorable="d"
+        Title="Data Warehouse Tool" Height="450" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Grid.Row="1" Grid.Column="0" Margin="10" Content="{Binding InputServers}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ComboBox x:Name="comboBox1" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="textBlock1" Text="Select input Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <Trigger SourceName="comboBox1" Property="SelectedItem" Value="{x:Null}">
+                            <Setter TargetName="textBlock1" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+
+        <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Content="{Binding OutputServers}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ComboBox x:Name="comboBox2" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="textBlock2" Text="Select output Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <Trigger SourceName="comboBox2" Property="SelectedItem" Value="{x:Null}">
+                            <Setter TargetName="textBlock2" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+        
+        <Button  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Margin="75" Content="Start Data Migration" Command="{Binding DataMigrateCommand}"/>
+    </Grid>
+
+</Window>
