@@ -1,4 +1,8 @@
 ﻿using System.Windows;
+using DataWareHouseTool.DAL.Configuration;
+using DataWareHouseTool.DAL.Configuration.Interfaces;
+using DataWareHouseTool.DAL.Repositories;
+using DataWareHouseTool.DAL.Repositories.Interfaces;
 using DataWareHouseTool.Services;
 using DataWareHouseTool.Services.Interfaces;
 using DataWareHouseTool.ViewModels;
@@ -20,7 +24,15 @@ namespace DataWareHouseTool
 
             //services
             unityContainer.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
-            
+            unityContainer.RegisterType<IApplicationContextService, ApplicationContextService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<IServerService, ServerService>(new ContainerControlledLifetimeManager());
+
+            //factories
+            unityContainer.RegisterType<IConnectionFactory, SqlConnectionFactory>(new ContainerControlledLifetimeManager());
+
+            //repositories
+            unityContainer.RegisterType<ISystemDatabaseRepository, SystemDatabaseRepository>(new ContainerControlledLifetimeManager());
+
             //viewmodels
             unityContainer.RegisterType<IMainViewModel, MainViewModel>();
 
@@ -30,13 +42,6 @@ namespace DataWareHouseTool
             LoadMainPage(unityContainer);
         }
 
-        private static async void LoadMainPage(IUnityContainer unityContainer)
-        {
-            var mainView = unityContainer.Resolve<INavigationService>()?.SetMainView(unityContainer.Resolve<IMainView>());
-            if (mainView != null)
-            {
-                await mainView;
-            }
-        }
+        private static void LoadMainPage(IUnityContainer unityContainer) => unityContainer.Resolve<INavigationService>()?.SetMainView(unityContainer.Resolve<IMainView>());
     }
 }

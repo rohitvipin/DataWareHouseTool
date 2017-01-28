@@ -7,14 +7,16 @@ namespace DataWareHouseTool.Services
 {
     public class NavigationService : INavigationService
     {
-        public async Task SetMainView(IView view)
+        public void SetMainView(IView view)
         {
             var initialize = view?.Initialize();
-            if (initialize != null)
+            if (initialize == null)
             {
-                await initialize;
-                (view as Window)?.Show();
+                return;
             }
+
+            (view as Window)?.Show();
+            Task.Run(async () => await initialize);
         }
     }
 }

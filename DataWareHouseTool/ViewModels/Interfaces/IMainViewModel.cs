@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using DataWareHouseTool.Common;
 using DataWareHouseTool.Entities;
 
@@ -6,8 +6,10 @@ namespace DataWareHouseTool.ViewModels.Interfaces
 {
     public interface IMainViewModel : IViewModel
     {
-        List<Server> InputServers { get; set; }
-        List<Server> OutputServers { get; set; }
+        ObservableCollection<Server> InputServers { get; set; }
+        ObservableCollection<Server> OutputServers { get; set; }
+        Server SelectedOutputServer { get; set; }
+        Server SelectedInputServer { get; set; }
         AsyncRelayCommand DataMigrateCommand { get; }
     }
 }

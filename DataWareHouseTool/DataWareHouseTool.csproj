@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +56,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,9 +81,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\AsyncRelayCommand .cs" />
+    <Compile Include="Helpers\Converter.cs" />
+    <Compile Include="DAL\Configuration\Interfaces\IConnectionFactory.cs" />
+    <Compile Include="DAL\Configuration\SqlConnectionFactory.cs" />
+    <Compile Include="DAL\Models\SystemDatabase.cs" />
+    <Compile Include="DAL\Repositories\SystemDatabaseRepository.cs" />
+    <Compile Include="DAL\Repositories\Interfaces\ISystemDatabaseRepository.cs" />
+    <Compile Include="DAL\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Entities\Server.cs" />
+    <Compile Include="Services\ApplicationContextService.cs" />
+    <Compile Include="Services\Interfaces\IApplicationContextService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
+    <Compile Include="Services\Interfaces\IServerService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\ServerService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IMainViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IViewModel.cs" />

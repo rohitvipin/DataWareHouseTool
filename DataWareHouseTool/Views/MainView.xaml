@@ -21,7 +21,7 @@
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ComboBox x:Name="comboBox1" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="comboBox1" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center" SelectedItem="{Binding DataContext.SelectedInputServer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
                         <TextBlock x:Name="textBlock1" Text="Select input Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
                     </Grid>
                     <DataTemplate.Triggers>
@@ -37,7 +37,7 @@
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ComboBox x:Name="comboBox2" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="comboBox2" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center" SelectedItem="{Binding DataContext.SelectedOutputServer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
                         <TextBlock x:Name="textBlock2" Text="Select output Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
                     </Grid>
                     <DataTemplate.Triggers>
@@ -48,7 +48,7 @@
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
-        
+
         <Button  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Margin="75" Content="Start Data Migration" Command="{Binding DataMigrateCommand}"/>
     </Grid>
 

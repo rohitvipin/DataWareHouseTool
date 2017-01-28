@@ -1,31 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using DataWareHouseTool.Common;
 using DataWareHouseTool.Entities;
+using DataWareHouseTool.Services.Interfaces;
 using DataWareHouseTool.ViewModels.Interfaces;
 
 namespace DataWareHouseTool.ViewModels
 {
     public class MainViewModel : BaseViewModel, IMainViewModel
     {
-        public MainViewModel()
+        private readonly IServerService _serverService;
+        private readonly IApplicationContextService _applicationContextService;
+
+        public MainViewModel(IServerService serverService, IApplicationContextService applicationContextService)
         {
+            _serverService = serverService;
+            _applicationContextService = applicationContextService;
             DataMigrateCommand = new AsyncRelayCommand(DataMigrateCommandHandler);
         }
 
-        public List<Server> InputServers { get; set; }
-        public List<Server> OutputServers { get; set; }
+        public ObservableCollection<Server> InputServers { get; set; } = new ObservableCollection<Server>();
+        public ObservableCollection<Server> OutputServers { get; set; } = new ObservableCollection<Server>();
+        public Server SelectedInputServer { get; set; }
+        public Server SelectedOutputServer { get; set; }
         public AsyncRelayCommand DataMigrateCommand { get; }
 
         private async Task DataMigrateCommandHandler()
         {
-
+            if (SelectedInputServer != null && SelectedOutputServer != null && (_serverService != null && _applicationContextService != null))
+            {
+                _applicationContextService.OutputConnectionString = _serverService.GetOutputConnectionString(SelectedOutputServer);
+            }
         }
 
         public override async Task Initialize()
         {
-            InputServers = new List<Server> { new Server { Id = 1, Name = "1" }, new Server { Id = 2, Name = "2" }, new Server { Id = 3, Name = "3" }, new Server { Id = 4, Name = "4" } };
-            OutputServers = new List<Server> { new Server { Id = 1, Name = "1" }, new Server { Id = 2, Name = "2" }, new Server { Id = 3, Name = "3" }, new Server { Id = 4, Name = "4" } };
+            var allInputServers = _serverService?.GetAllInputServers();
+            var allOutputServers = _serverService?.GetAllOutputServers();
+
+            if (allInputServers != null)
+            {
+                InputServers = new ObservableCollection<Server>(await allInputServers);
+            }
+            if (allOutputServers != null)
+            {
+                OutputServers = new ObservableCollection<Server>(await allOutputServers);
+            }
         }
+
+
     }
 }
