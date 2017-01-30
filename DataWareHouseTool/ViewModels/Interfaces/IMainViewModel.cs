@@ -10,10 +10,10 @@ namespace DataWareHouseTool.ViewModels.Interfaces
         ObservableCollection<Server> OutputServers { get; set; }
         Server SelectedOutputServer { get; set; }
         Server SelectedInputServer { get; set; }
-        ServerOptions OutputServerOptions { get; set; }
-        ServerOptions InputServerOptions { get; set; }
+        ServerOption OutputServerOption { get; set; }
+        ServerOption InputServerOption { get; set; }
         AsyncRelayCommand DataMigrateCommand { get; }
-        AsyncRelayCommand ShowOutputServerOptions { get; }
-        AsyncRelayCommand ShowInputServerOptions { get; }
+        AsyncRelayCommand ShowOutputServerOption { get; }
+        AsyncRelayCommand ShowInputServerOption { get; }
     }
 }

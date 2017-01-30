@@ -13,15 +13,21 @@ namespace DataWareHouseTool.ViewModels
         private readonly IServerService _serverService;
         private readonly IApplicationContextService _applicationContextService;
         private readonly ILoggingService _loggingService;
+        private readonly IUserPreferenceService _userPreferenceService;
 
-        public MainViewModel(IServerService serverService, IApplicationContextService applicationContextService, ILoggingService loggingService)
+        public MainViewModel(IServerService serverService, IApplicationContextService applicationContextService, ILoggingService loggingService, IUserPreferenceService userPreferenceService)
         {
             _serverService = serverService;
             _applicationContextService = applicationContextService;
             _loggingService = loggingService;
-            ShowOutputServerOptions = new AsyncRelayCommand(ShowOutputServerOptionsHandler);
-            ShowInputServerOptions = new AsyncRelayCommand(ShowInputServerOptionsHandler);
+            _userPreferenceService = userPreferenceService;
+
+            ShowOutputServerOption = new AsyncRelayCommand(ShowOutputServerOptionHandler);
+            ShowInputServerOption = new AsyncRelayCommand(ShowInputServerOptionHandler);
             DataMigrateCommand = new AsyncRelayCommand(DataMigrateCommandHandler);
+
+            InputServerOption = _userPreferenceService?.InputServerDetails;
+            OutputServerOption = _userPreferenceService?.OutputServerDetails;
         }
 
         private async Task DataMigrateCommandHandler()
@@ -40,11 +46,11 @@ namespace DataWareHouseTool.ViewModels
             }
         }
 
-        private async Task ShowInputServerOptionsHandler()
+        private async Task ShowInputServerOptionHandler()
         {
         }
 
-        private async Task ShowOutputServerOptionsHandler()
+        private async Task ShowOutputServerOptionHandler()
         {
         }
 
@@ -52,11 +58,11 @@ namespace DataWareHouseTool.ViewModels
         public ObservableCollection<Server> OutputServers { get; set; } = new ObservableCollection<Server>();
         public Server SelectedInputServer { get; set; }
         public Server SelectedOutputServer { get; set; }
-        public ServerOptions OutputServerOptions { get; set; } = new ServerOptions();
-        public ServerOptions InputServerOptions { get; set; } = new ServerOptions();
+        public ServerOption OutputServerOption { get; set; } = new ServerOption();
+        public ServerOption InputServerOption { get; set; } = new ServerOption();
         public AsyncRelayCommand DataMigrateCommand { get; }
-        public AsyncRelayCommand ShowOutputServerOptions { get; }
-        public AsyncRelayCommand ShowInputServerOptions { get; }
+        public AsyncRelayCommand ShowOutputServerOption { get; }
+        public AsyncRelayCommand ShowInputServerOption { get; }
         
         public override async Task Initialize()
         {

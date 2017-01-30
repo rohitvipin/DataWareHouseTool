@@ -1,0 +1,12 @@
+﻿{
+  "inputServer": {
+    "serverName": "s1",
+    "userName": "u1",
+    "password": "p1"
+  },
+  "outputServer": {
+    "serverName": "s2",
+    "userName": "u2",
+    "password": "p2"
+  }
+}
