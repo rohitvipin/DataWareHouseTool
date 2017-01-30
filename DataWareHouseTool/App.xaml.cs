@@ -25,6 +25,7 @@ namespace DataWareHouseTool
             //services
             unityContainer.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<IApplicationContextService, ApplicationContextService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ILoggingService, LoggingService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<IServerService, ServerService>(new ContainerControlledLifetimeManager());
 
             //factories

@@ -81,6 +81,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\AsyncRelayCommand .cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Entities\ServerOptions.cs" />
     <Compile Include="Helpers\Converter.cs" />
     <Compile Include="DAL\Configuration\Interfaces\IConnectionFactory.cs" />
     <Compile Include="DAL\Configuration\SqlConnectionFactory.cs" />
@@ -91,8 +93,10 @@
     <Compile Include="Entities\Server.cs" />
     <Compile Include="Services\ApplicationContextService.cs" />
     <Compile Include="Services\Interfaces\IApplicationContextService.cs" />
+    <Compile Include="Services\Interfaces\ILoggingService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IServerService.cs" />
+    <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServerService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
