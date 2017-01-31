@@ -84,6 +84,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\AppConstants.cs" />
     <Compile Include="Common\AsyncRelayCommand .cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Entities\UserPreference.cs" />
@@ -96,8 +97,11 @@
     <Compile Include="DAL\Repositories\Interfaces\ISystemDatabaseRepository.cs" />
     <Compile Include="DAL\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Entities\Server.cs" />
+    <Compile Include="Helpers\DbConnectionHelper.cs" />
     <Compile Include="Services\ApplicationContextService.cs" />
+    <Compile Include="Services\IDbConnectionService.cs" />
     <Compile Include="Services\Interfaces\IApplicationContextService.cs" />
+    <Compile Include="Services\Interfaces\IDbConnectionService.cs" />
     <Compile Include="Services\Interfaces\ILoggingService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IServerService.cs" />

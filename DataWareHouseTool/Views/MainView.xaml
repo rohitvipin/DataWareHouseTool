@@ -34,8 +34,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" x:Name="textBlock1" Text="Select input Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
 
                         <ToggleButton Grid.Row="0" Grid.Column="1" x:Name="BtnInputServerOption" IsHitTestVisible="{Binding ElementName=PopupInputServerOption, Path=IsOpen, Mode=OneWay, Converter={converters:InverseBooleanConverter}}"
-                                      Width="20" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                      Command="{Binding DataContext.ShowInputServerOption, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                                      Width="20" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
                             <TextBlock Text="..."/>
                         </ToggleButton>
                         <Popup Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsOpen="{Binding IsChecked, ElementName=BtnInputServerOption}" x:Name="PopupInputServerOption" StaysOpen="False">
@@ -50,8 +49,8 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="85" />
+                                        <ColumnDefinition Width="125" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="SQL Server Login" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                     <Label Grid.Row="1" Grid.Column="0" Content="Server Name"  VerticalAlignment="Center"/>
@@ -60,7 +59,7 @@
                                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ServerName}" VerticalAlignment="Center" Margin="10" />
                                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" VerticalAlignment="Center" Margin="10" />
                                     <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Password}" VerticalAlignment="Center" Margin="10" />
-                                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Margin="20"/>
+                                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Margin="20" Command="{Binding DataContext.ConnectToInputServer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
 
                                 </Grid>
                             </Border>
@@ -90,8 +89,7 @@
                         <ComboBox Grid.Row="0" Grid.Column="0" x:Name="comboBox2" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" VerticalAlignment="Center" SelectedItem="{Binding DataContext.SelectedOutputServer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
                         <TextBlock Grid.Row="0" Grid.Column="0" x:Name="textBlock2" Text="Select output Data Server" IsHitTestVisible="False" Visibility="Hidden" VerticalAlignment="Center" Margin="10"/>
                         <ToggleButton Grid.Row="0" Grid.Column="1" x:Name="BtnOutputServerOption" IsHitTestVisible="{Binding ElementName=PopupOutputServerOption, Path=IsOpen, Mode=OneWay, Converter={converters:InverseBooleanConverter}}"
-                                      Width="20" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                      Command="{Binding DataContext.ShowOutputServerOption, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                                      Width="20" FontSize="10" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
                             <TextBlock Text="..."/>
                         </ToggleButton>
                         <Popup Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsOpen="{Binding IsChecked, ElementName=BtnOutputServerOption}" x:Name="PopupOutputServerOption" StaysOpen="False">
@@ -106,8 +104,8 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="85" />
+                                        <ColumnDefinition Width="125" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="SQL Server Login" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                     <Label Grid.Row="1" Grid.Column="0" Content="Server Name"  VerticalAlignment="Center"/>
@@ -116,7 +114,7 @@
                                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ServerName}" VerticalAlignment="Center" Margin="10" />
                                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" VerticalAlignment="Center" Margin="10" />
                                     <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Password}" VerticalAlignment="Center" Margin="10" />
-                                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Margin="20"/>
+                                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Margin="20" Command="{Binding DataContext.ConnectToOutputServer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
 
                                 </Grid>
                             </Border>

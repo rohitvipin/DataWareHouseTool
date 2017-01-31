@@ -13,8 +13,6 @@ namespace DataWareHouseTool.ViewModels.Interfaces
         ServerOption OutputServerOption { get; set; }
         ServerOption InputServerOption { get; set; }
         AsyncRelayCommand DataMigrateCommand { get; }
-        AsyncRelayCommand ShowOutputServerOption { get; }
-        AsyncRelayCommand ShowInputServerOption { get; }
         AsyncRelayCommand ConnectToInputServer { get; }
         AsyncRelayCommand ConnectToOutputServer { get; }
     }

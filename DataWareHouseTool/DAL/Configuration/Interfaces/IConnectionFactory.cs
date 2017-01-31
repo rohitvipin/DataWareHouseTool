@@ -6,5 +6,6 @@ namespace DataWareHouseTool.DAL.Configuration.Interfaces
     {
         IDbConnection GetInputInstance();
         IDbConnection GetOutputInstance();
+        bool IsConnectionAvailable(string connectionString);
     }
 }
