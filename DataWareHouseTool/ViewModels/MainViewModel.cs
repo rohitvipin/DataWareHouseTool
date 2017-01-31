@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using DataWareHouseTool.Common;
 using DataWareHouseTool.Entities;
 using DataWareHouseTool.Services.Interfaces;
@@ -25,9 +26,15 @@ namespace DataWareHouseTool.ViewModels
             ShowOutputServerOption = new AsyncRelayCommand(ShowOutputServerOptionHandler);
             ShowInputServerOption = new AsyncRelayCommand(ShowInputServerOptionHandler);
             DataMigrateCommand = new AsyncRelayCommand(DataMigrateCommandHandler);
+            ConnectToOutputServer = new AsyncRelayCommand(ConnectToOutputServerHandler);
+            ConnectToInputServer = new AsyncRelayCommand(ConnectToInputServerHandler);
+        }
 
-            InputServerOption = _userPreferenceService?.InputServerDetails;
-            OutputServerOption = _userPreferenceService?.OutputServerDetails;
+        private static void ShowConnectionError() => MessageBox.Show("Connection to server failed!", "Connection Error", MessageBoxButton.OK);
+
+        private bool IsConnectionSuccessfull(ServerOption serverOption)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task DataMigrateCommandHandler()
@@ -48,22 +55,89 @@ namespace DataWareHouseTool.ViewModels
 
         private async Task ShowInputServerOptionHandler()
         {
+            try
+            {
+                var inputServerDetailsAsync = _userPreferenceService?.GetInputServerDetailsAsync();
+                if (inputServerDetailsAsync != null)
+                {
+                    InputServerOption = await inputServerDetailsAsync;
+                }
+            }
+            catch (Exception exception)
+            {
+                _loggingService?.Log(exception);
+            }
         }
 
         private async Task ShowOutputServerOptionHandler()
         {
+            try
+            {
+                var outputServerDetailsAsync = _userPreferenceService?.GetOutputServerDetailsAsync();
+                if (outputServerDetailsAsync != null)
+                {
+                    OutputServerOption = await outputServerDetailsAsync;
+                }
+            }
+            catch (Exception exception)
+            {
+                _loggingService?.Log(exception);
+            }
+        }
+
+        private async Task ConnectToInputServerHandler()
+        {
+            try
+            {
+                if (IsConnectionSuccessfull(InputServerOption))
+                {
+                    var saveInputServerDetailsAsync = _userPreferenceService?.SaveInputServerDetailsAsync(InputServerOption);
+                    if (saveInputServerDetailsAsync != null)
+                    {
+                        await saveInputServerDetailsAsync;
+                    }
+                    return;
+                }
+                ShowConnectionError();
+            }
+            catch (Exception exception)
+            {
+                _loggingService?.Log(exception);
+            }
+        }
+
+        private async Task ConnectToOutputServerHandler()
+        {
+            try
+            {
+                if (IsConnectionSuccessfull(InputServerOption))
+                {
+                    var saveInputServerDetailsAsync = _userPreferenceService?.SaveInputServerDetailsAsync(InputServerOption);
+                    if (saveInputServerDetailsAsync != null)
+                    {
+                        await saveInputServerDetailsAsync;
+                    }
+                }
+                ShowConnectionError();
+            }
+            catch (Exception exception)
+            {
+                _loggingService?.Log(exception);
+            }
         }
 
         public ObservableCollection<Server> InputServers { get; set; } = new ObservableCollection<Server>();
         public ObservableCollection<Server> OutputServers { get; set; } = new ObservableCollection<Server>();
         public Server SelectedInputServer { get; set; }
         public Server SelectedOutputServer { get; set; }
-        public ServerOption OutputServerOption { get; set; } = new ServerOption();
-        public ServerOption InputServerOption { get; set; } = new ServerOption();
+        public ServerOption OutputServerOption { get; set; }
+        public ServerOption InputServerOption { get; set; }
         public AsyncRelayCommand DataMigrateCommand { get; }
         public AsyncRelayCommand ShowOutputServerOption { get; }
         public AsyncRelayCommand ShowInputServerOption { get; }
-        
+        public AsyncRelayCommand ConnectToInputServer { get; }
+        public AsyncRelayCommand ConnectToOutputServer { get; }
+
         public override async Task Initialize()
         {
             try
